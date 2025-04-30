@@ -61,6 +61,15 @@ def registro_ventana():
     text='Crear usuario',
     manager=manager)
 
+    error_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect((left, top + 4*(button_height+spacing)), (total_width, button_height)),
+    text='',
+    manager=manager,
+    visible=False
+    )
+    error_label.text_colour = pygame.Color('#FF0000') 
+    error_label.rebuild()
+
 
     clock = pygame.time.Clock()
     running = True
@@ -85,9 +94,11 @@ def registro_ventana():
                             base_Usuarios.actualizarJson()
                             running = False
                         else:
-                            print("Las contraseñas no coinciden")
+                             error_label.set_text("Las contraseñas no coinciden")
+                             error_label.visible = True
                     else:
-                        print("El nombre de usuario ya existe")
+                         error_label.set_text("El nombre de usuario ya existe")
+                         error_label.visible = True
 
             manager.process_events(event)
             
@@ -106,3 +117,4 @@ if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_RES)
     registro_ventana()
+
