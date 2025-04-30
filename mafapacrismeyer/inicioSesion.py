@@ -56,6 +56,17 @@ def inicio_sesion_ventana():
     text='Iniciar sesión',
     manager=manager)
 
+    error_label = pygame_gui.elements.UILabel(
+    relative_rect=pygame.Rect((left, top + 3*(button_height+spacing)), (total_width, button_height)),
+    text='',
+    manager=manager,
+    visible=False
+
+)  
+    error_label.text_colour = pygame.Color('#FF0000') 
+    error_label.rebuild()
+    
+   
     clock = pygame.time.Clock()
     running = True
     while running:
@@ -78,9 +89,11 @@ def inicio_sesion_ventana():
                             print("Sesión iniciada")
                             running = False
                         else:
-                            print("Contraseña incorrecta")
+                            error_label.set_text("¡Contraseña incorrecta!")
+                            error_label.visible = True
                     else:
-                        print("El nombre de usuario no existe")
+                        error_label.set_text("Usuario no existe")
+                        error_label.visible = True
 
                 
 
