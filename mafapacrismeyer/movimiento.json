@@ -1,0 +1,27 @@
+[
+{
+    
+    "id":"saltar",
+    "descripcion": "permite que el personaje pueda evadir obstaculos y saltar plataformas"
+    
+},
+{
+    
+    "id" : "trepar",
+    "descripcion" : "puede hacer que el personaje trepe las escaleras"
+}
+,
+{
+    
+    "id" : "correr",
+    "descripcion" : "permite que el personaje aumente su velocidad y se desplace rapidamente"
+}
+,
+{
+   
+    "id" : "deslizarse",
+    "descripcion" : "desliza bajo obstaculos "
+}
+
+
+]

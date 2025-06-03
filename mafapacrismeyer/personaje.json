@@ -1,0 +1,33 @@
+
+{
+  
+  "gato":{
+  "vida": 75,
+  "velocidad": 30,
+  "experiencia": 1000
+},
+
+  
+  "perro":{
+  "vida": 90,
+  "velocidad": 20,
+  "experiencia": 5000
+}
+,
+
+  
+  "conejo":{
+  "vida": 70,
+  "velocidad": 35,
+  "experiencia": 600
+}
+,
+
+  
+  "ninja":{
+  "vida": 100,
+  "velocidad": 40,
+  "experiencia": 200
+}
+}
+

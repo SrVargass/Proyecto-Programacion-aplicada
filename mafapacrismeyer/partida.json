@@ -1,0 +1,37 @@
+[
+{
+
+
+    "id": "partida1",
+    "nivel": 2,
+    "dificultad": "dificil",
+    "duracion": 10,
+    "enemigos_derrotados": 20,
+    "resultado": "derrota"
+       
+},{
+
+
+
+
+    "id": "partida2",
+    "nivel": 4,
+    "dificultad": "facil",
+    "duracion": 3,
+    "enemigos_derrotados": 5,
+    "resultado": "victoria"
+}
+,{
+
+
+
+
+    "id": "partida3",
+    "nivel": 5,
+    "dificultad": "normal",
+    "duracion": 6,
+    "enemigos_derrotados": 16,
+    "resultado": "victoria"
+}
+
+]
