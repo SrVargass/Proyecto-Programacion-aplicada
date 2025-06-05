@@ -1,27 +1,31 @@
-[
 {
     
-    "id":"saltar",
-    "descripcion": "permite que el personaje pueda evadir obstaculos y saltar plataformas"
+    "saltar": {
+    "descripcion": "permite que el personaje pueda evadir obstaculos y saltar plataformas" ,
+    "tecla": "espacio"
     
 },
-{
+
     
-    "id" : "trepar",
-    "descripcion" : "puede hacer que el personaje trepe las escaleras"
+    "trepar": {
+    "descripcion" : "puede hacer que el personaje trepe las escaleras",
+    "tecla": "arriba"
+
 }
 ,
-{
+
     
-    "id" : "correr",
-    "descripcion" : "permite que el personaje aumente su velocidad y se desplace rapidamente"
+    "correr": {
+    "descripcion" : "permite que el personaje aumente su velocidad y se desplace rapidamente",
+    "tecla": "r"
 }
 ,
-{
+
    
-    "id" : "deslizarse",
-    "descripcion" : "desliza bajo obstaculos "
+    "deslizarse": {
+    "descripcion" : "desliza bajo obstaculos ",
+    "tecla":"shift"
+}
 }
 
 
-]
