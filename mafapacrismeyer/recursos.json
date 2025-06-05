@@ -1,36 +1,33 @@
-[
+
 {
     
-    "id":"pistola",
+    "pistola":{
     "tipo": "arma",
     "daño": 50
     
 },
-
-{   
+ 
     
-    "id":"bate_de_baseball",
+    "bate_de_baseball":{
     "tipo": "arma",
     "daño": 25
 
 }
 ,
-
-{   
+  
     
-    "id":"rama",
+    "ramita":{
     "tipo": "arma",
     "daño": 10
 
 }
 ,
 
-{   
-    "id" : 777,
-    "nombre":"latigo",
+
+    "latigo":{
     "tipo": "arma",
     "daño": 25
 
 }
 
-]
+}
