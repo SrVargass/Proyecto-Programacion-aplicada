@@ -53,3 +53,9 @@ def mafapacris_juego():
 
         pygame.display.update()
         
+
+
+#if __name__ == "__main__":
+    #pygame.init()
+    #screen = pygame.display.set_mode(SCREEN_RES)
+    #mafapacris_juego()

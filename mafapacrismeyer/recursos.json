@@ -1,33 +1,22 @@
-
 {
-    
-    "pistola":{
-    "tipo": "arma",
-    "daño": 50
-    
-},
- 
-    
-    "bate_de_baseball":{
-    "tipo": "arma",
-    "daño": 25
-
-}
-,
-  
-    
-    "ramita":{
-    "tipo": "arma",
-    "daño": 10
-
-}
-,
-
-
-    "latigo":{
-    "tipo": "arma",
-    "daño": 25
-
-}
-
+    "pistola": {
+        "tipo": "arma",
+        "daño": 50
+    },
+    "bate_de_baseball": {
+        "tipo": "arma",
+        "daño": 25
+    },
+    "ramita": {
+        "tipo": "arma",
+        "daño": 10
+    },
+    "latigo": {
+        "tipo": "arma",
+        "daño": 25
+    },
+    "pistola3": {
+        "tipo": "fuego",
+        "daño": 5
+    }
 }

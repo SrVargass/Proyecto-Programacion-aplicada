@@ -3,10 +3,11 @@ import pygame_gui
 from constantes import *
 
 
-def registro_ventana(screen):
+def registro_ventana(screen,color_inicial):
 
     background = pygame.Surface(SCREEN_RES)
-    background.fill(pygame.Color('#FFFFFF'))
+    current_color=color_inicial
+    background.fill(current_color)
 
     manager = pygame_gui.UIManager(SCREEN_RES)
 
@@ -112,13 +113,12 @@ def registro_ventana(screen):
             manager.process_events(event)
             
         manager.update(time_delta)
-
-        screen.blit(background)
+        screen.blit(background,(0,0))
         manager.draw_ui(screen)
 
         pygame.display.update()
-
-if __name__ == "__main__":
-    pygame.init()
-    screen = pygame.display.set_mode(SCREEN_RES)
-    registro_ventana(screen)
+    return current_color
+#if __name__ == "__main__":
+#    pygame.init()
+#    screen = pygame.display.set_mode(SCREEN_RES)
+#    registro_ventana(screen)

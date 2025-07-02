@@ -1,5 +1,6 @@
 import pygame
 from userinput import UserInput
+from entities import Player
 
 BLOCK_SIZE=48
 
@@ -9,157 +10,7 @@ def draw_spriteDisplacement(sprite, displacement, Surface):
     copy.center = (sprite.rect.centerx+displacement[0] , sprite.rect.centery+displacement[1])
 
     Surface.blit(sprite.image, copy)
-    
-
-class Player(pygame.sprite.Sprite):
-    def __init__(self, Input, collisionGroup, ladderGroup):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((36,40))
-        self.image.fill(pygame.Color('#10FF10'))
-        self.rect = self.image.get_rect()
-        self.centerrect = pygame.Rect((self.rect.center),(1,1))
-        
-        self._input = Input
-        self.collisions = collisionGroup
-        self.ladders = ladderGroup
-        self.x = 0
-        self.y = 0
-        self.vel_x = 0
-        self.vel_y = 0
-
-        self.state = "default"
-
-
-    def place(self, x, y):
-        self.rect.centerx = x+(BLOCK_SIZE//2)
-        self.rect.bottom = y+BLOCK_SIZE
-
-        
-    def draw(self, Surface):
-        Surface.blit(self.image, self.rect)
-
-    def move_and_collide(self):
-        collisionList = self.collisions.sprites()        
-        
-        # Colisiones comunes
-        collRect = self.rect.copy()
-        
-        collRect.x += self.vel_x
-        collision_index = collRect.collidelist(collisionList)
-        if collision_index >= 0:
-            if collRect.centerx < collisionList[collision_index].rect.centerx:
-                collRect.right = collisionList[collision_index].rect.left
-            else:
-                collRect.left = collisionList[collision_index].rect.right
-
-        collRect.y += self.vel_y
-        collision_index = collRect.collidelist(collisionList)
-        
-        if collision_index >= 0:
-            if collRect.centery < collisionList[collision_index].rect.centery:
-                collRect.bottom = collisionList[collision_index].rect.top
-            else:
-                collRect.top = collisionList[collision_index].rect.bottom
-
-        self.rect.x = collRect.x
-        self.rect.y = collRect.y
-
-    def on_floor(self):
-        collRect = self.rect.copy()
-        collRect.y += 1
-        ladder_list = self.ladders.sprites()
-
-        collision_index = collRect.collidelist(self.collisions.sprites())
-        ladd_coll_index = collRect.collidelist(ladder_list)
-
-        normal_collision = (collision_index != -1)
-        ladder_collision = (ladd_coll_index != -1) and ladder_list[ladd_coll_index].is_top() and (self.rect.bottom <= ladder_list[ladd_coll_index].rect.top)
-        #print(ladder_collision)
-        
-        if normal_collision or ladder_collision:
-            return True
-        else:
-            return False
-
-    def on_ladder(self):
-        
-        collision_index = self.rect.collidelist(self.ladders.sprites())
-        return collision_index
-
-    def center_on_ladder(self):        
-        collision_index = self.centerrect.collidelist(self.ladders.sprites())
-        return collision_index
-
-    def floor_isladder(self):
-        collRect = self.centerrect.copy()
-        collRect.y += self.rect.height//2
-        ladder_list = self.ladders.sprites()
-
-        collision_index = collRect.collidelist(ladder_list)
-
-        return collision_index != -1
-
-    def update_state(self):
-        if self.state == "default":
-            if (self.center_on_ladder()!=-1) and self._input[1]==1 and self.on_floor():
-                self.state = "ladder"
-            elif (self.center_on_ladder()!=-1) and self._input[1] and not self.on_floor():
-                self.state = "ladder"
-            elif (self.floor_isladder()) and self._input[1]==-1 and self.on_floor():
-                self.rect.y += 1
-                self.state = "ladder"
-                
-        elif self.state == "ladder":
-            if self._input[2]:
-                self.state = "default"
-            groundCondition = self.on_floor() and (self._input[1] == -1)
-            on_ladder = self.on_ladder() != -1
-            if groundCondition or not on_ladder:
-                self.state = "default"
-                
-
-    def set_vel(self):
-        if self.state == "default":
-            if self.on_floor():
-                self.vel_y = 0
-                if self._input[0]:
-                    self.vel_x = self._input[0]*(4)
-                else:
-                    self.vel_x = 0
-
-                if self._input[2]:
-                    self.vel_y = -6
-            else:
-                self.vel_y += 0.4
-            
-        elif self.state == "ladder":
-            index = self.on_ladder()
-            current_ladder = self.ladders.sprites()[index]
-            ladderCenter = current_ladder.rect.centerx
-            self.vel_x = 0
-            groundCondition = self.on_floor() and (self._input[1] == -1)
-            
-            if (index != -1) and not groundCondition:
-                self.rect.centerx = ladderCenter                
-                if self._input[1] == 1:
-                    self.vel_y = -3
-                elif self._input[1] == -1:
-                    self.vel_y = 3
-                else:
-                    self.vel_y = 0
-            else:
-                self.vel_y = 0
-
-            
-    
-    def update(self):
-        self.set_vel()
-        self.update_state()
-        self.move_and_collide()
-        self.centerrect.center = self.rect.center
-        self.x = self.rect.bottom
-        self.y = self.rect.centery
-
+               
 
 class Block(pygame.sprite.Sprite):
     def __init__(self):
@@ -200,13 +51,14 @@ class Ladder(pygame.sprite.Sprite):
 
 class Camera():
     def __init__(self, frame):
-        self.frame = frame
+        self.frame = frame #Rect contaning the level elements
         self.margin = 48
         self._width = 920
         self._height = 690
         self.x = 0
         self.y = 0
         self.rect = pygame.Rect(0, 0, self._width, self._height)
+        self.trackbox = pygame.Rect(0,0, 230,230)
         self.rect.center = (self.x, self.y)
         self.sprites = []
         
@@ -235,26 +87,37 @@ class Camera():
                                         Surface)                
 
     def track_x(self, X):
-        self.x = X
-        self.rect.centerx = X
+        #self.x = X
+        self.rect.centerx = self.trackbox.centerx
+
+        if X > self.trackbox.right:
+            self.trackbox.right = X
+        elif X < self.trackbox.left:
+            self.trackbox.left = X
+        #self.x = self.trackbox.centerx           
+
         
         if self.rect.right > self.frame.right+self.margin:
             self.rect.right = self.frame.right+self.margin
-            self.x = self.rect.centerx
         elif self.rect.left < self.frame.left-self.margin:
             self.rect.left = self.frame.left-self.margin
-            self.x = self.rect.centerx
+        self.x = self.rect.centerx
+
 
     def track_y(self, Y):
-        self.y = Y
-        self.rect.centery = Y
+        #self.y = Y
+        self.rect.centery = self.trackbox.centery
+
+        if Y > self.trackbox.bottom:
+            self.trackbox.bottom = Y
+        elif Y < self.trackbox.top:
+            self.trackbox.top = Y
 
         if self.rect.bottom > self.frame.bottom+self.margin:
             self.rect.bottom = self.frame.bottom+self.margin
-            self.y = self.rect.centery
         elif self.rect.top < self.frame.top-self.margin:
             self.rect.top = self.frame.top-self.margin
-            self.y = self.rect.centery
+        self.y = self.rect.centery
 
     def update(self, target):
         #self.rect.center = (self.y,self.x)

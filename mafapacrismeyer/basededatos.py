@@ -12,7 +12,12 @@ class BaseUsuarios():
 
     def eliminar_usuario(self, nombre):
         self.dict.pop(nombre)
-
+    def cargar(self):
+        try:
+            with open(self._filename, 'r') as f:
+                self.usuarios = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.usuarios = {}
     def actualizarJson(self):
         with open(self._filename, "w") as json_file:
             json_str = json.dumps(self.dict)
@@ -42,7 +47,7 @@ class Usuario():
         self.sesionIniciada = False
 
 
-#baseUsuarios = BaseUsuarios("usuarios.json")
+base_Usuarios = BaseUsuarios("usuarios.json")
 #baseUsuarios.crear_usuario("tralalero","tralala")
 #print(baseUsuarios.dict)
 #baseUsuarios.actualizarJson()

@@ -2,12 +2,14 @@ import pygame
 import pygame_gui
 from constantes import *
 from sesionIniciada import cuentaIniciada
-from basededatos import Usuario
+from basededatos import Usuario,base_Usuarios
+from gestor_datos import ventana_gestor_datos  
 
-def inicio_sesion_ventana(screen):
+def inicio_sesion_ventana(screen,color_fondo):
+    base_Usuarios.cargar()
     manager = pygame_gui.UIManager(SCREEN_RES)
     background = pygame.Surface(SCREEN_RES)
-    background.fill(pygame.Color('#FFFFFF'))
+    background.fill(color_fondo)
     
     # boton de volver
     button_rect = pygame.Rect((20, 20), (100, 50))
@@ -77,6 +79,7 @@ def inicio_sesion_ventana(screen):
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 print("hola")
                 if event.ui_element == volver_boton:
+                    result="BACK"
                     running = False
                     
                 if event.ui_element == iniciar_boton:
@@ -91,29 +94,32 @@ def inicio_sesion_ventana(screen):
                     else:
                         user = Usuario(base_Usuarios, nombre)
                         if user.iniciar_sesion(clave):
-                            result=cuentaIniciada(screen, user)
+                            if nombre=="gestor" and clave=="44333":
+                                result= ventana_gestor_datos(screen)
+                            else:    
+                                result,color_fondo=cuentaIniciada(screen, user,color_fondo)
                             if result =="QUIT":
-                                return "QUIT"
+                                return "QUIT",color_fondo
                             if result =="LOGOUT":
-                                running = False
+                                return "LOGOUT",color_fondo
                         else:
                             error_label.set_text("¡Contraseña incorrecta!")
                             error_label.visible = True
 
             manager.process_events(event)
-            
         manager.update(time_delta)
+        background.fill(color_fondo)    
         screen.blit(background, (0,0))
         manager.draw_ui(screen)
         pygame.display.update()
 
-    return result
+    return result, color_fondo
 
 
     
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
-    pygame.init()
-    screen = pygame.display.set_mode(SCREEN_RES)
-    inicio_sesion_ventana(screen)
+    #pygame.init()
+    #screen = pygame.display.set_mode(SCREEN_RES)
+    #inicio_sesion_ventana(screen)

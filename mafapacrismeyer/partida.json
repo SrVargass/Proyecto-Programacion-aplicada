@@ -1,36 +1,51 @@
 {
-
-
-    "partida1":{
-    "nivel": 2,
-    "dificultad": "dificil",
-    "duracion": 10,
-    "enemigos_derrotados": 20,
-    "resultado": "derrota"
-       
-},
-
-
-
-
-    "partida2":{
-    "nivel": 4,
-    "dificultad": "facil",
-    "duracion": 3,
-    "enemigos_derrotados": 5,
-    "resultado": "victoria"
-}
-,
-
-
-
-
-    "partida3":{
-    "nivel": 5,
-    "dificultad": "normal",
-    "duracion": 6,
-    "enemigos_derrotados": 16,
-    "resultado": "victoria"
-}
-
+    "partida1": {
+        "nivel": 2,
+        "dificultad": "dificil",
+        "duracion": 10,
+        "enemigos_derrotados": 20,
+        "resultado": "derrota"
+    },
+    "partida2": {
+        "nivel": 4,
+        "dificultad": "facil",
+        "duracion": 3,
+        "enemigos_derrotados": 5,
+        "resultado": "victoria"
+    },
+    "partida3": {
+        "nivel": 5,
+        "dificultad": "normal",
+        "duracion": 6,
+        "enemigos_derrotados": 16,
+        "resultado": "victoria"
+    },
+    "partida4": {
+        "nivel": 3,
+        "dificultad": "normal",
+        "duracion": 8,
+        "enemigos_derrotados": 12,
+        "resultado": "victoria"
+    },
+    "partida5": {
+        "nivel": 3,
+        "dificultad": "normal",
+        "duracion": 8,
+        "enemigos_derrotados": 12,
+        "resultado": "victoria"
+    },
+    "partida6": {
+        "nivel": 3,
+        "dificultad": "normal",
+        "duracion": 8,
+        "enemigos_derrotados": 12,
+        "resultado": "victoria"
+    },
+    "partida0": {
+        "nivel": 2,
+        "dificultad": "Normal",
+        "duracion": 6,
+        "enemigos_derrotados": 30,
+        "resultado": "Victoria"
+    }
 }

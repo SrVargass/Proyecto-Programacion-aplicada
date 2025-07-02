@@ -8,3 +8,4 @@ SCREEN_RES = (SCREEN_WIDTH, SCREEN_HEIGHT)
 
 base_Usuarios = BaseUsuarios("usuarios.json")
 
+TITULO_JUEGO = "MAFAPACRIS MEYER"
