@@ -31,12 +31,15 @@ def mafapacris_juego():
             if event == VICTORIA:
                 #print(nivel)
                 nivel_n += 1
-                if nivel_n > 2:
+                if nivel_n > 6:
                     nivel_n = 0
                 loaded = False
             if event == DERROTA:
                 loaded = False
-                
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return
+
         if not loaded:
             #BorrarTodo()
             #CargarNivel(int:Nivel)
@@ -50,9 +53,3 @@ def mafapacris_juego():
 
         pygame.display.update()
         
-
-
-if __name__ == "__main__":
-    pygame.init()
-    screen = pygame.display.set_mode(SCREEN_RES)
-    mafapacris_juego()
