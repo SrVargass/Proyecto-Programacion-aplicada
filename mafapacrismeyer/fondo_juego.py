@@ -217,6 +217,9 @@ class FondoManager:
 
     def mostrar(self):
         """Bucle principal de la interfaz"""
+        fondo_anterior = None
+        imagen_cargada = None
+
         clock = pygame.time.Clock()
         running = True
         
@@ -252,14 +255,20 @@ class FondoManager:
             
             # Previsualización
             fondo_actual = self.config["fondo_actual"]
-            if fondo_actual and fondo_actual in self.config["fondos"]:
-                try:
-                    img = pygame.image.load(self.config["fondos"][fondo_actual])
-                    img = pygame.transform.scale(img, (self.preview_rect.width, self.preview_rect.height))
-                    self.screen.blit(img, self.preview_rect)
-                except Exception as e:
-                    print(f"Error cargando imagen: {e}")
-                    pygame.draw.rect(self.screen, (255, 0, 0), self.preview_rect, 2)
+            if fondo_actual != fondo_anterior:
+                fondo_anterior = fondo_actual
+                imagen_cargada = None
+                if fondo_actual and fondo_actual in self.config["fondos"]:
+                    try: 
+                        img = pygame.image.load(self.config["fondos"][fondo_actual])
+                        imagen_cargada = pygame.transform.scale(img,(self.preview_rect.width,self.preview_rect.height))
+                    except Exception as e:
+                        print(f"Error cargando imagen: {e}")
+                        imagen_cargada = None
+            if imagen_cargada:
+                self.screen.blit(imagen_cargada, self.preview_rect)
+            else:
+                pygame.draw.rect(self.screen, (255, 0, 0), self.preview_rect, 2)
             
             self.manager.update(time_delta)
             self.manager.draw_ui(self.screen)
