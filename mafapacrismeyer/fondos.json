@@ -1,0 +1,11 @@
+{
+    "fondos": {
+        "fondonieve": "extra\\fondos\\fondonieve.png",
+        "fondoselva": "extra\\fondos\\fondoselva.png",
+        "fondorio": "juego\\resorce\\background\\fondorio.png",
+        "fondorio_2": "juego\\resource\\background\\fondorio_2.png",
+        "fondoselva_1": "juego\\resource\\background\\fondoselva_1.png",
+        "20240624_211631": "juego\\resource\\background\\20240624_211631.jpg"
+    },
+    "fondo_actual": "fondonieve"
+}

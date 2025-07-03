@@ -4,6 +4,9 @@ import pygame_gui
 from constantes import *
 from color_fondo import fondo_color
 from color_avatar import fondo_color_h,obtener_color_inicial_h
+from fondo_juego import fondo_juego
+from musica_juego import musica_juego  # NUEVO IMPORT
+
 def Ajustes(screen,color_inicial,nombre_usuario):
     manager = pygame_gui.UIManager(SCREEN_RES)
     background = pygame.Surface(SCREEN_RES)
@@ -47,14 +50,21 @@ def Ajustes(screen,color_inicial,nombre_usuario):
                     else:
                         current_color=result
                 if event.ui_element == buttons[1]:  # Iniciar sesión
-                    #result = musica_fondo(screen)
-                    #if result == "QUIT":
-                    #    running = False
-                    #    should_quit = True
-                    pass
+                    ruta_musica = musica_juego(screen)
+                    if ruta_musica == "QUIT":
+                        running = False
+                        should_quit = True
+                    elif ruta_musica:
+                        try:
+                            pygame.mixer.music.load(ruta_musica)
+                            pygame.mixer.music.play(-1)  # Repetir indefinidamente
+                        except Exception as e:
+                            print(f"Error cargando música: {e}")
                 if event.ui_element == buttons[2]:  # Registrar usuario
-                    #fondo_juego(screen)
-                    pass
+                      result = fondo_juego(screen)
+                      if result == "QUIT":
+                         running = False
+                         should_quit = True
                 if event.ui_element == buttons[3]: #color personaje
                     color_inicial_personaje = obtener_color_inicial_h(nombre_usuario)
                     result = fondo_color_h(screen,color_inicial_personaje,nombre_usuario)
