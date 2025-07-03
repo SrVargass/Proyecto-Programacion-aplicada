@@ -1,6 +1,8 @@
 import pygame
 from constantes import *
 from menu import menuPrincipal
+from color_por_usuario import cargar_color_usuario
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_RES)
@@ -10,6 +12,7 @@ def main():
 
     running = True
     while running:
+        color_fondo = cargar_color_usuario("invitado")
         action = menuPrincipal(screen, color_fondo)
         if action == "QUIT":
             running = False

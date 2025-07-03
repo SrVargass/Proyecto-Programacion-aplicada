@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 from importarJuego import juego
 from ajustes import Ajustes
+from color_por_usuario import cargar_color_usuario
 
 sys.path.append(str(Path(__file__).parent / "juego"))
 
@@ -82,7 +83,7 @@ def cuentaIniciada(screen, usuario,color_fondo):
                         message_label.visible = True
                         
                 elif event.ui_element == ajuste_boton:
-                    nuevo_color = Ajustes(screen,color_fondo)
+                    nuevo_color = Ajustes(screen,color_fondo,usuario.nombre)
                     if nuevo_color == "QUIT":
                         running = False
                     else:
@@ -92,6 +93,7 @@ def cuentaIniciada(screen, usuario,color_fondo):
                     usuario.cerrar_sesion()
                     message_label.set_text("Sesión cerrada correctamente")
                     message_label.visible = True
+                    color_fondo=cargar_color_usuario("invitado")
                     result = "LOGOUT"
                     running = False
                     

@@ -57,7 +57,7 @@ def menuPrincipal(screen, color_fondo):
                     registro_ventana(screen,color_fondo)
                 
                 elif event.ui_element == buttons[3]:  # Ajustes
-                    result = Ajustes(screen, color_fondo)
+                    result = Ajustes(screen, color_fondo,"invitado")
                     if result is not None:
                         color_fondo = result
                 

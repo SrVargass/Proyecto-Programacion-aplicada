@@ -4,7 +4,7 @@ from constantes import *
 from sesionIniciada import cuentaIniciada
 from basededatos import Usuario,base_Usuarios
 from gestor_datos import ventana_gestor_datos  
-
+from color_por_usuario import cargar_color_usuario
 def inicio_sesion_ventana(screen,color_fondo):
     base_Usuarios.cargar()
     manager = pygame_gui.UIManager(SCREEN_RES)
@@ -94,6 +94,8 @@ def inicio_sesion_ventana(screen,color_fondo):
                     else:
                         user = Usuario(base_Usuarios, nombre)
                         if user.iniciar_sesion(clave):
+                            color_fondo = cargar_color_usuario(user.nombre)
+                            
                             if nombre=="gestor" and clave=="44333":
                                 result= ventana_gestor_datos(screen)
                             else:    

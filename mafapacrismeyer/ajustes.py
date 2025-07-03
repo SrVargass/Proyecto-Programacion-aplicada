@@ -3,7 +3,8 @@ import pygame
 import pygame_gui
 from constantes import *
 from color_fondo import fondo_color
-def Ajustes(screen,color_inicial):
+from color_avatar import fondo_color_h,obtener_color_inicial_h
+def Ajustes(screen,color_inicial,nombre_usuario):
     manager = pygame_gui.UIManager(SCREEN_RES)
     background = pygame.Surface(SCREEN_RES)
     current_color=color_inicial
@@ -38,7 +39,7 @@ def Ajustes(screen,color_inicial):
                 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == buttons[0]:  
-                    result = fondo_color(screen,current_color)
+                    result = fondo_color(screen,current_color,nombre_usuario)
                     
                     if result == "QUIT":  # Si el juego retorna False, salir
                         running = False
@@ -54,9 +55,12 @@ def Ajustes(screen,color_inicial):
                 if event.ui_element == buttons[2]:  # Registrar usuario
                     #fondo_juego(screen)
                     pass
-                if event.ui_element == buttons[3]: #ajustes
-                    pass
-                    #fondo_juego(screen)    
+                if event.ui_element == buttons[3]: #color personaje
+                    color_inicial_personaje = obtener_color_inicial_h(nombre_usuario)
+                    result = fondo_color_h(screen,color_inicial_personaje,nombre_usuario)
+                    if result == "QUIT":
+                        running=False
+                        should_quit=True
                 if event.ui_element == buttons[4]:  # Volver
                     running = False
                     should_quit = True
