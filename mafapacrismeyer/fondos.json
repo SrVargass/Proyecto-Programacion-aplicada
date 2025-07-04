@@ -1,11 +1,6 @@
 {
     "fondos": {
-        "fondonieve": "extra\\fondos\\fondonieve.png",
-        "fondoselva": "extra\\fondos\\fondoselva.png",
-        "fondorio": "juego\\resorce\\background\\fondorio.png",
-        "fondorio_2": "juego\\resource\\background\\fondorio_2.png",
-        "fondoselva_1": "juego\\resource\\background\\fondoselva_1.png",
-        "20240624_211631": "juego\\resource\\background\\20240624_211631.jpg"
+        "planet-earth-with-sunrise-in-space-photo": "juego\\resource\\background\\planet-earth-with-sunrise-in-space-photo.jpg"
     },
-    "fondo_actual": "fondonieve"
+    "fondo_actual": "planet-earth-with-sunrise-in-space-photo"
 }

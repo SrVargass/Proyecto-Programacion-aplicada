@@ -7,7 +7,8 @@ from pathlib import Path
 from importarJuego import juego
 from ajustes import Ajustes
 from color_por_usuario import cargar_color_usuario
-
+from avatar_color import cargar_avatar_hue
+from juego.backgroundloader import recargar_imagenes_fondo 
 sys.path.append(str(Path(__file__).parent / "juego"))
 
 def cuentaIniciada(screen, usuario,color_fondo):  
@@ -74,7 +75,9 @@ def cuentaIniciada(screen, usuario,color_fondo):
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == jugar_boton:
                     if usuario.sesionIniciada:
-                        game_result = juego()
+                        recargar_imagenes_fondo()
+                        hue_avatar= cargar_avatar_hue(usuario.nombre)
+                        game_result = juego(avatarHue=hue_avatar)
                         if game_result == False:
                             result = "QUIT"
                             running = False

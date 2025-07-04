@@ -6,7 +6,7 @@ from registro import registro_ventana
 from importarJuego import juego
 from ajustes import Ajustes
 import sys
-    
+import json
 
 def menuPrincipal(screen, color_fondo):
     
@@ -39,10 +39,19 @@ def menuPrincipal(screen, color_fondo):
             
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == buttons[0]:
-                    result = juego()
-                    if result == "QUIT":
-                        running = False
-                        should_quit = True
+                
+                    try:
+                        with open("color_avatar.json","r",encoding="utf-8") as f:
+                            colores = json.load(f)
+                            hue_invitado = colores.get("invitado",55)
+                    except Exception as e:
+                        print(f"Error al leer los colores: {e}")
+                        hue_invitado=55
+                    result = juego(avatarHue=hue_invitado)
+                #    result = juego(avatarHue=55)
+                #    if result == "QUIT":
+                #        running = False
+                #        should_quit = True
                     
                 elif event.ui_element == buttons[1]:
                     result,color_fondo = inicio_sesion_ventana(screen,color_fondo)

@@ -1,8 +1,6 @@
 {
     "audios": {
-        "random-random-16828_1": "juego\\resource\\musica\\random-random-16828_1.mp3",
-        "random-wave-42704-52850 (1)": "juego\\resource\\music\\random-wave-42704-52850 (1).mp3",
-        "random-wave-42704-52850": "juego\\resource\\music\\random-wave-42704-52850.mp3"
+        "amarillo amarillo amarillo los plátanos Android notification sound": "juego\\resource\\music\\amarillo amarillo amarillo los plátanos Android notification sound.mp3"
     },
-    "audio_actual": "random-random-16828_1"
+    "audio_actual": null
 }

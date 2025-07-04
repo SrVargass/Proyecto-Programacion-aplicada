@@ -1,6 +1,7 @@
 import pygame
 from userinput import UserInput
 from entities import Player
+from entities import Enemy
 
 BLOCK_SIZE=48
 
@@ -164,7 +165,7 @@ class Coin(pygame.sprite.Sprite):
 
 
 class Level:
-    def __init__(self, arrayTable):
+    def __init__(self, arrayTable, colorHue=55):
         self.VICTORIA = pygame.event.Event(pygame.USEREVENT + 1, {"mensaje":"wawa"})
         self.DERROTA = pygame.event.Event(pygame.USEREVENT + 2)
 
@@ -179,14 +180,16 @@ class Level:
         self.enemy_group = pygame.sprite.Group()
         self.block_group = pygame.sprite.Group()
         self.ladder_group = pygame.sprite.Group()
+        self.topladder_group = pygame.sprite.Group() ##
         self.coin_group = pygame.sprite.Group()
 
-        self.player = Player(self._userInput.get_input(), self.block_group, self.ladder_group)
+        self.player = Player(self._userInput.get_input(), self.block_group, self.ladder_group, self.topladder_group, colorHue=colorHue)
 
-        self.camera = Camera(self.rect) #
-        self.camera.add_sprite(self.enemy_group)
+        self.camera = Camera(self.rect)
+        
         self.camera.add_sprite(self.block_group)
         self.camera.add_sprite(self.ladder_group)
+        self.camera.add_sprite(self.enemy_group)
         self.camera.add_sprite(self.coin_group)
         
         self.camera.add_sprite(self.player)
@@ -206,6 +209,8 @@ class Level:
                     ladder.place(x*BLOCK_SIZE,y*BLOCK_SIZE)
                     self.ladder_group.add(ladder)
                     ladder.set_group(self.ladder_group)
+                    if ladder.is_top():
+                        self.topladder_group.add(ladder)
 
                 elif arrayTable[y][x] == '$': # Moneda
                     coin = Coin(self.player)
@@ -213,10 +218,12 @@ class Level:
                     self.coin_group.add(coin)
                     
                 
-                #elif arrayTable[y][x] == enemyCharacter:
-                #   enemy = EnemyClass()
-                #   enemy.place(x,y)
-                #   add_to_enemyGroup
+                elif arrayTable[y][x] == '!':
+                    enemy = Enemy(self.block_group, self.ladder_group, self.topladder_group)
+                    enemy.place(x*BLOCK_SIZE,y*BLOCK_SIZE)
+                    enemy.set_focus(self.player)
+                    self.enemy_group.add(enemy)
+                    enemy.set_focus(self.player)
 
                 elif character == '@':
                    self.player.place(x*BLOCK_SIZE,y*BLOCK_SIZE)               

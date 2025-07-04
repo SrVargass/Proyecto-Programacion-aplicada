@@ -10,15 +10,25 @@ def add_level(filename):
         data = json.load(file)
         levels.append(data)
 
-add_level("nivel_0.json")
-add_level("nivel_1.json")
-add_level("nivel_2.json")
-add_level("nivel_3.json")
-add_level("nivel_4.json")
-add_level("nivel_5.json")
-add_level("nivel_6.json")
+path = os.path.join(os.path.dirname(__file__), 'niveles')
+fileArray = os.listdir(path)
+fileArray.sort()
 
+for filename in fileArray:
+    add_level(filename)
+    
+#add_level("nivel_0.json")
+#add_level("nivel_1.json")
+#add_level("nivel_2.json")
+#add_level("nivel_3.json")
+#add_level("nivel_4.json")
+#add_level("nivel_5.json")
+#add_level("nivel_6.json")
 
-def load_level(level_index):
-    level = Level(levels[level_index])
+print(fileArray)
+
+def load_level(level_index, colorHue=55):
+    index = level_index % len(fileArray) #
+    
+    level = Level(levels[index], colorHue=colorHue) #
     return level
